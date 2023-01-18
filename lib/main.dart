@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app_clean_arch/core/utils/helper/dio_helper.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  DioHelper.dioInit();
   runApp(const MyApp());
 }
 
