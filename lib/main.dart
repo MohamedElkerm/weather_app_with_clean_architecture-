@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app_clean_arch/core/utils/helper/dio_helper.dart';
+import 'package:weather_app_clean_arch/weather/data/data_sources/remote_data_source.dart';
+import 'package:weather_app_clean_arch/weather/data/repositories/weather_repository.dart';
+import 'package:weather_app_clean_arch/weather/domain/entities/weather.dart';
+import 'package:weather_app_clean_arch/weather/domain/repositories/weather_repository.dart';
+import 'package:weather_app_clean_arch/weather/domain/use_cases/get_weather_by_country.dart';
 
-void main() {
+void main()async{
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.dioInit();
+  BaseRemoteDataSource baseRemoteDataSource = RemoteDataSource();
+  BaseWeatherRepository baseWeatherRepository = WeatherRepository(baseRemoteDataSource);
+  Weather weather = await GetWeatherByCountry(repository: baseWeatherRepository).execute('cairo');
+  print('/////////////////////////////////////////////////////');
+  print(weather);
+  print('/////////////////////////////////////////////////////');
   runApp(const MyApp());
 }
 

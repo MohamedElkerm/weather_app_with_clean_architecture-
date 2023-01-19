@@ -13,7 +13,11 @@ class RemoteDataSource implements BaseRemoteDataSource {
   @override
   Future<WeatherModel> getWeatherByCountryName(String countryName) async {
     Response response = await DioHelper.getData(
-        url: '/weather?q=$countryName&appid=${AppConstants.apiKey}');
-    return WeatherModel.fromJson(json.decode(response.data));
+        url: '/weather?q=$countryName&appid=${AppConstants.apiKey}').then((value){
+          print('***---***');
+          print(value.data.toString());
+          return value;
+    });
+    return WeatherModel.fromJson(response.data);
   }
 }
